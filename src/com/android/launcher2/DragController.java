@@ -33,8 +33,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 
-import com.android.launcher.R;
-
 /**
  * Class for initiating a drag within a view or across multiple views.
  */
@@ -49,6 +47,7 @@ public class DragController {
     public static int DRAG_ACTION_COPY = 1;
 
     private static final int SCROLL_DELAY = 600;
+    private static final int SCROLL_ZONE = 20;
     private static final int VIBRATE_DURATION = 35;
 
     private static final boolean PROFILE_DRAWING_DURING_DRAG = false;
@@ -88,11 +87,6 @@ public class DragController {
     /** Y offset from the upper-left corner of the cell to where we touched.  */
     private float mTouchOffsetY;
 
-    /** the area at the edge of the screen that makes the workspace go left
-     *   or right while you're dragging.
-     */
-    private int mScrollZone;
-
     /** Where the drag originated */
     private DragSource mDragSource;
 
@@ -105,7 +99,7 @@ public class DragController {
     /** Who can receive drop events */
     private ArrayList<DropTarget> mDropTargets = new ArrayList<DropTarget>();
 
-    private DragListener mListener;
+    private ArrayList<DragListener> mListeners = new ArrayList<DragListener>();
 
     /** The window token used as the parent for the DragView. */
     private IBinder mWindowToken;
@@ -153,7 +147,6 @@ public class DragController {
     public DragController(Context context) {
         mContext = context;
         mHandler = new Handler();
-        mScrollZone = context.getResources().getDimensionPixelSize(R.dimen.scroll_zone);
     }
 
     /**
@@ -220,8 +213,8 @@ public class DragController {
         }
         mInputMethodManager.hideSoftInputFromWindow(mWindowToken, 0);
 
-        if (mListener != null) {
-            mListener.onDragStart(source, dragInfo, dragAction);
+        for( DragListener l : mListeners ){
+            l.onDragStart(source, dragInfo, dragAction);
         }
 
         int registrationX = ((int)mMotionDownX) - screenX;
@@ -304,8 +297,8 @@ public class DragController {
             if (mOriginator != null) {
                 mOriginator.setVisibility(View.VISIBLE);
             }
-            if (mListener != null) {
-                mListener.onDragEnd();
+            for( DragListener l : mListeners ){
+                l.onDragEnd();
             }
             if (mDragView != null) {
                 mDragView.remove();
@@ -385,7 +378,7 @@ public class DragController {
             mMotionDownX = screenX;
             mMotionDownY = screenY;
 
-            if ((screenX < mScrollZone) || (screenX > scrollView.getWidth() - mScrollZone)) {
+            if ((screenX < SCROLL_ZONE) || (screenX > scrollView.getWidth() - SCROLL_ZONE)) {
                 mScrollState = SCROLL_WAITING_IN_ZONE;
                 mHandler.postDelayed(mScrollRunnable, SCROLL_DELAY);
             } else {
@@ -426,15 +419,13 @@ public class DragController {
             if (mDeleteRegion != null) {
                 inDeleteRegion = mDeleteRegion.contains(screenX, screenY);
             }
-            //Log.d(Launcher.TAG, "inDeleteRegion=" + inDeleteRegion + " screenX=" + screenX
-            //        + " mScrollZone=" + mScrollZone);
-            if (!inDeleteRegion && screenX < mScrollZone) {
+            if (!inDeleteRegion && screenX < SCROLL_ZONE) {
                 if (mScrollState == SCROLL_OUTSIDE_ZONE) {
                     mScrollState = SCROLL_WAITING_IN_ZONE;
                     mScrollRunnable.setDirection(SCROLL_LEFT);
                     mHandler.postDelayed(mScrollRunnable, SCROLL_DELAY);
                 }
-            } else if (!inDeleteRegion && screenX > scrollView.getWidth() - mScrollZone) {
+            } else if (!inDeleteRegion && screenX > scrollView.getWidth() - SCROLL_ZONE) {
                 if (mScrollState == SCROLL_OUTSIDE_ZONE) {
                     mScrollState = SCROLL_WAITING_IN_ZONE;
                     mScrollRunnable.setDirection(SCROLL_RIGHT);
@@ -537,15 +528,15 @@ public class DragController {
     /**
      * Sets the drag listner which will be notified when a drag starts or ends.
      */
-    public void setDragListener(DragListener l) {
-        mListener = l;
+    public void addDragListener(DragListener l) {
+        mListeners.add( l );
     }
 
     /**
      * Remove a previously installed drag listener.
      */
-    public void removeDragListener(DragListener l) {
-        mListener = null;
+    public void clearDragListeners(DragListener l) {
+        mListeners = new ArrayList<DragListener>();
     }
 
     /**

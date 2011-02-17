@@ -150,17 +150,6 @@ class AllAppsList {
                     modified.add(applicationInfo);
                 }
             }
-        } else {
-            // Remove all data for this package.
-            for (int i = data.size() - 1; i >= 0; i--) {
-                final ApplicationInfo applicationInfo = data.get(i);
-                final ComponentName component = applicationInfo.intent.getComponent();
-                if (packageName.equals(component.getPackageName())) {
-                    removed.add(applicationInfo);
-                    mIconCache.remove(component);
-                    data.remove(i);
-                }
-            }
         }
     }
 
@@ -172,10 +161,23 @@ class AllAppsList {
 
         final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        mainIntent.setPackage(packageName);
 
         final List<ResolveInfo> apps = packageManager.queryIntentActivities(mainIntent, 0);
-        return apps != null ? apps : new ArrayList<ResolveInfo>();
+        final List<ResolveInfo> matches = new ArrayList<ResolveInfo>();
+
+        if (apps != null) {
+            // Find all activities that match the packageName
+            int count = apps.size();
+            for (int i = 0; i < count; i++) {
+                final ResolveInfo info = apps.get(i);
+                final ActivityInfo activityInfo = info.activityInfo;
+                if (packageName.equals(activityInfo.packageName)) {
+                    matches.add(info);
+                }
+            }
+        }
+
+        return matches;
     }
 
     /**

@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="hotseats" translatable="false">
-        <item>intent:#Intent;action=android.intent.action.DIAL;end</item>
+
+	<!-- ******* MARKET LAUNCHER, far left, index 0 ****** -->
+	<!-- <item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.vending/.AssetBrowserActivity;end</item> -->
+	<!-- ******* TALK LAUNCHER, far left, index 0 ******* -->
+	<item>intent:#Intent;action=android.intent.action.MAIN;component=com.google.android.talk/.SigningInActivity;end</item>
+
+	<!-- ******* PHONE LAUNCHER ******, left, index 1 -->
+	<!-- Droid x motoblur (Blur Phone) -->
+	<!--<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.phone/.DialtactsContactsEntryActivity;end</item> -->
+	<!-- Droid 1, Droid x Tranquility (Froyo Phone) -->        
+	<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.contacts/.ContactsLaunchActivity;end</item>
+
+	<!-- ******* BROWSER LAUNCHER, right, index 2 ****** -->
         <item>*BROWSER*</item>
+
+	<!-- ******* EMAIL LAUNCHER ******, far right, index 3 -->
+	<!-- Droid x motoblur (Blur Messaging Home) -->        
+	<!--<item>intent:#Intent;action=android.intent.action.MAIN;component=com.motorola.blur.messaging/.MessagingActivity;end</item>-->
+        <!-- Droid 1, Droid x tranquility (Froyo Email) -->
+	<!--<item>intent:#Intent;action=android.intent.action.MAIN;component=com.google.android.email/com.android.email.activity.Welcome;end</item>-->
+	<!-- Dustin Stock Froyo Email -->
+	<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.email/.activity.Welcome;end</item>
+
     </string-array>
-    <array name="hotseat_icons" translatable="false">
-        <item>@drawable/hotseat_phone</item>
-        <item>@drawable/hotseat_browser</item>
+
+    <array name="hotseat_icons_gingerbread" translatable="false">
+        <item>@drawable/hotseat_talk_gingerbread</item>
+        <item>@drawable/hotseat_phone_gingerbread</item>
+        <item>@drawable/hotseat_browser_gingerbread</item>
+        <item>@drawable/hotseat_email_gingerbread</item>  
     </array>
+
+    <array name="hotseat_icons_froyo" translatable="false">
+        <item>@drawable/hotseat_talk_froyo</item>
+        <item>@drawable/hotseat_phone_froyo</item>
+        <item>@drawable/hotseat_browser_froyo</item>
+        <item>@drawable/hotseat_email_froyo</item>  
+    </array>
+
+    <array name="hotseat_backgrounds_gingerbread" translatable="false">
+        <item>@drawable/hotseat_bg_left_gingerbread</item>
+        <item>@drawable/hotseat_bg_center_gingerbread</item>
+        <item>@drawable/hotseat_bg_center_gingerbread</item>  
+        <item>@drawable/hotseat_bg_right_gingerbread</item> 
+    </array>
+
+    <array name="hotseat_backgrounds_froyo" translatable="false">
+        <item>@drawable/hotseat_bg_left_froyo</item>
+        <item>@drawable/hotseat_bg_center_froyo</item>
+        <item>@drawable/hotseat_bg_center_froyo</item>  
+        <item>@drawable/hotseat_bg_right_froyo</item> 
+    </array>
+
+    <array name="hotseat_backgrounds_black" translatable="false">
+        <item>@drawable/hotseat_bg_left_black</item>
+        <item>@drawable/hotseat_bg_center_black</item>
+        <item>@drawable/hotseat_bg_center_black</item>  
+        <item>@drawable/hotseat_bg_right_black</item> 
+    </array>
+
 </resources>

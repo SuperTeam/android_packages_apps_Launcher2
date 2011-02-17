@@ -46,12 +46,10 @@
     <string name="shortcut_uninstalled" msgid="2129499669449749995">"Se ha eliminado el acceso directo \"<xliff:g id="NAME">%s</xliff:g>\"."</string>
     <string name="shortcut_duplicate" msgid="4757756326465060694">"El acceso directo \"<xliff:g id="NAME">%s</xliff:g>\" ya existe."</string>
     <string name="title_select_shortcut" msgid="2858897527672831763">"Seleccionar acceso directo"</string>
-    <string name="title_select_application" msgid="8031072293115454221">"Seleccionar aplicación"</string>
     <string name="title_select_live_folder" msgid="3753447798805166749">"Seleccionar carpeta"</string>
     <string name="all_apps_button_label" msgid="3953036962111614813">"Todas las aplicaciones"</string>
     <string name="all_apps_home_button_label" msgid="1022222300329398558">"Inicio"</string>
     <string name="menu_add" msgid="3065046628354640854">"Añadir"</string>
-    <string name="menu_manage_apps" msgid="2308685199463588895">"Administrar aplicaciones"</string>
     <string name="menu_wallpaper" msgid="5837429080911269832">"Fondo de pantalla"</string>
     <string name="menu_search" msgid="4826514464423239041">"Buscar con Google"</string>
     <string name="menu_notifications" msgid="6424587053194766192">"Notificaciones"</string>
@@ -66,4 +64,21 @@
     <string name="permlab_write_settings" msgid="1360567537236705628">"escribir información de accesos directos y de configuración del escritorio"</string>
     <string name="permdesc_write_settings" msgid="1098648778383349818">"Permite que una aplicación modifique la configuración y los accesos directos de la página de inicio."</string>
     <string name="gadget_error_text" msgid="8359351016167075858">"Problema al cargar el widget"</string>
+    <!-- Context menu for hotseat items -->
+    <string name="hotseat_context_title">Opciones de dock</string>
+    <string name="hotseat_context_select">Escoje aplicación</string>
+    <string name="hotseat_context_default">Aplicación por defecto</string>
+    <string name="hotseat_context_cancel">Cancela</string>
+
+    <!-- Hotseat app chooser -->
+    <string name="hotseat_selector_title">Opciones de dock</string>
+    <string name="hotseat_selector_init_toast">Escoje una app para el dock.</string>
+
+    <!-- Application selection activity -->
+    <string name="select_app_working">Cargando aplicaciones</string>
+
+    <!-- Launcher Settings Titles/Sections -->
+    <string name="launcher_menu_prefs_title">Opciones de Launcher</string>
+    <string name="launcher_prefs_title">Preferencias de Launcher</string>
+	<string name="hotseat_section_prefs">Preferencias de dock</string>
 </resources>

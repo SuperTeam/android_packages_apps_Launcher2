@@ -41,6 +41,7 @@
 
     </com.android.launcher2.Workspace>
 
+
     <com.android.launcher2.ClippedImageView
         android:id="@+id/previous_screen"
         android:layout_width="93dip"
@@ -75,26 +76,49 @@
         android:focusable="true"
         android:clickable="true" />
 
-    <com.android.launcher2.DeleteZone
-        android:id="@+id/delete_zone"
-        android:layout_width="@dimen/delete_zone_size"
-        android:layout_height="@dimen/delete_zone_size"
-        android:paddingLeft="@dimen/delete_zone_padding"
-        android:layout_marginBottom="@dimen/half_status_bar_height"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
         android:layout_gravity="right|center_vertical"
+        android:gravity="center_vertical"
+        android:weightSum="4"
+    >
 
-        android:scaleType="center"
-        android:src="@drawable/delete_zone_selector"
-        android:visibility="invisible"
-        launcher:direction="vertical"
-        />
+        <com.android.launcher2.DeleteZone
+            android:id="@+id/delete_zone"
+            android:layout_width="@dimen/delete_zone_size"
+            android:layout_weight="1"
+            android:layout_height="@dimen/delete_zone_size"
+            android:paddingTop="@dimen/delete_zone_padding"
+            android:layout_gravity="right"
+            android:scaleType="center"
+            android:src="@drawable/delete_zone_selector"
+            android:visibility="invisible"
+            launcher:direction="vertical"
+            />
+
+        <com.android.launcher2.SettingsZone
+            android:id="@+id/settings_zone"
+            android:layout_width="@dimen/delete_zone_size"
+            android:layout_weight="1"
+            android:layout_height="@dimen/delete_zone_size"
+            android:paddingTop="@dimen/delete_zone_padding"
+            android:layout_gravity="right"
+
+            android:scaleType="center"
+            android:src="@drawable/settings_zone_selector"
+            android:visibility="invisible"
+            launcher:direction="vertical"
+            />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/all_apps_button_cluster"
         android:layout_height="fill_parent"
         android:layout_width="@dimen/button_bar_height_portrait"
         android:layout_gravity="right|center_vertical"
-        android:layout_marginBottom="@dimen/half_status_bar_height"
         >
 
         <com.android.launcher2.HandleView
@@ -102,7 +126,6 @@
             android:id="@+id/all_apps_button"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-
             android:src="@drawable/all_apps_button"
             launcher:direction="vertical"
             />
@@ -111,9 +134,6 @@
             android:id="@+id/hotseat_left"
             style="@style/HotseatButton.Left"
             android:layout_below="@id/all_apps_button"
-
-            android:src="@drawable/hotseat_phone"
-
             android:onClick="launchHotSeat"
             />
 
@@ -121,9 +141,6 @@
             android:id="@+id/hotseat_right"
             style="@style/HotseatButton.Right"
             android:layout_above="@id/all_apps_button"
-
-            android:src="@drawable/hotseat_browser"
-
             android:onClick="launchHotSeat"
             />
 

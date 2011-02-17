@@ -70,6 +70,8 @@ void setColor(float r, float g, float b, float a) {
 }
 
 void init() {
+
+/*
     g_AttractionTable[0] = 20.0f;
     g_AttractionTable[1] = 20.0f;
     g_AttractionTable[2] = 20.0f;
@@ -79,6 +81,8 @@ void init() {
     g_AttractionTable[6] = -20.0f;
     g_AttractionTable[7] = -20.0f;
     g_AttractionTable[8] = -20.0f;  // dup 7 to avoid a clamp later
+
+
     g_FrictionTable[0] = 10.0f;
     g_FrictionTable[1] = 10.0f;
     g_FrictionTable[2] = 11.0f;
@@ -88,6 +92,30 @@ void init() {
     g_FrictionTable[6] = 10.0f;
     g_FrictionTable[7] = 10.0f;
     g_FrictionTable[8] = 10.0f;  // dup 7 to avoid a clamp later
+    g_PhysicsTableSize = 7;
+*/
+
+// dustin -- testing modifications to attraction/friction tables
+    g_AttractionTable[0] = 25.0f;
+    g_AttractionTable[1] = 20.0f;
+    g_AttractionTable[2] = 17.0f;
+    g_AttractionTable[3] = 15.0f;
+    g_AttractionTable[4] = -15.0f;
+    g_AttractionTable[5] = -17.0f;
+    g_AttractionTable[6] = -20.0f;
+    g_AttractionTable[7] = -25.0f;
+    g_AttractionTable[8] = -30.0f;  // dup 7 to avoid a clamp later
+
+    g_FrictionTable[0] = 4.0f;
+    g_FrictionTable[1] = 4.0f;
+    g_FrictionTable[2] = 10.0f;
+    g_FrictionTable[3] = 22.0f;
+    g_FrictionTable[4] = 22.0f;
+    g_FrictionTable[5] = 10.0f;
+    g_FrictionTable[6] = 4.0f;
+    g_FrictionTable[7] = 4.0f;
+    g_FrictionTable[8] = 4.0f;  // dup 7 to avoid a clamp later
+
     g_PhysicsTableSize = 7;
 
     g_PosVelocity = 0;
@@ -99,7 +127,7 @@ void init() {
     g_SpecialHWWar = 1;
     g_MoveToTime = 0;
     g_MoveToOldPos = 0;
-    g_MoveToTotalTime = 0.2f; // Duration of scrolling 1 line
+    g_MoveToTotalTime = 0.1f; // Duration of scrolling 1 line
 }
 
 void resetHWWar() {
@@ -110,7 +138,8 @@ void move() {
     if (g_LastTouchDown) {
         float dx = -(state->newPositionX - g_LastPositionX);
         g_PosVelocity = 0;
-        g_PosPage += dx * 5.2f;
+// dustin adjust pos offset a bit from 5.2... this causes faster scrolling when drag-scrolling
+        g_PosPage += dx * 7.2f;
 
         float pmin = -0.49f;
         float pmax = g_PosMax + 0.49f;
@@ -138,9 +167,11 @@ void setZoom() {
 
 void fling() {
     g_LastTouchDown = 0;
-    g_PosVelocity = -state->flingVelocity * 4;
+    // dustin change flingvelocity multiplier from 4, increase to add speed
+    g_PosVelocity = -state->flingVelocity * 6;
     float av = fabsf(g_PosVelocity);
-    float minVel = 3.5f;
+    // dustin reduce min velocity from 3.5 for more sensitivity
+    float minVel = 1.5f;
 
     minVel *= 1.f - (fabsf(fracf(g_PosPage + 0.5f) - 0.5f) * 0.45f);
 
@@ -186,12 +217,14 @@ void updatePos() {
     float tablePosF = tablePosNorm * g_PhysicsTableSize;
     int tablePosI = tablePosF;
     float tablePosFrac = tablePosF - tablePosI;
+
     float accel = lerpf(g_AttractionTable[tablePosI],
                         g_AttractionTable[tablePosI + 1],
                         tablePosFrac) * g_DT;
     float friction = lerpf(g_FrictionTable[tablePosI],
                         g_FrictionTable[tablePosI + 1],
                         tablePosFrac) * g_DT;
+
 
     if (g_MoveToTime) {
         // New position is old posiition + (total distance) * (interpolated time)
@@ -284,6 +317,7 @@ void drawFrontGrid(float rowOffset, float p)
     float w = getWidth();
 
     int intRowOffset = rowOffset;
+	// dustin -- rowFrac is negative
     float rowFrac = rowOffset - intRowOffset;
     float colWidth = 120.f;//getWidth() / 4;
     float rowHeight = colWidth + 25.f;
@@ -363,7 +397,8 @@ main(int launchID)
     g_DT = minf(g_DT, 0.2f);
 
     if (g_Zoom != state->zoomTarget) {
-        float dz = g_DT * 1.7f;
+	// Dustin Jorge --- changed zoom speed by adjusting modifier from 1.7 to 4.5
+        float dz = g_DT * 4.5f;
         if (state->zoomTarget < 0.5f) {
             dz = -dz;
         }

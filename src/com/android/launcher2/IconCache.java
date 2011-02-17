@@ -124,10 +124,6 @@ public class IconCache {
         }
     }
 
-    public boolean isDefaultIcon(Bitmap icon) {
-        return mDefaultIcon == icon;
-    }
-
     private CacheEntry cacheLocked(ComponentName componentName, ResolveInfo info) {
         CacheEntry entry = mCache.get(componentName);
         if (entry == null) {

@@ -726,12 +726,7 @@ public class AllApps3D extends RSSurfaceView
     }
 
     public boolean onLongClick(View v) {
-        // We don't accept long click events in these cases
-        // - If the workspace isn't ready to accept a drop
-        // - If we're not done loading (because we might be confused about which item
-        //   to pick up
-        // - If we're not visible
-        if (!isVisible() || mLauncher.isWorkspaceLocked() || mLocks != 0) {
+        if (mLocks != 0 || !isVisible()) {
             return true;
         }
         if (sRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex
@@ -1161,7 +1156,8 @@ public class AllApps3D extends RSSurfaceView
 
                     "  float bendY1 = UNI_BendPos.x;\n" +
                     "  float bendY2 = UNI_BendPos.y;\n" +
-                    "  float bendAngle = 47.0 * (3.14 / 180.0);\n" +
+			// dustin -- adjuted bend angle to 40deg (From 47)
+                    "  float bendAngle = 50.0 * (3.14 / 180.0);\n" +
                     "  float bendDistance = bendY1 * 0.4;\n" +
                     "  float distanceDimLevel = 0.6;\n" +
 

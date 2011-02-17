@@ -61,8 +61,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     
     /**
      * The velocity at which a fling gesture will cause us to snap to the next screen
+     * dustin --- cut snap velocity in half for easier fling envoking...
      */
-    private static final int SNAP_VELOCITY = 600;
+    private static final int SNAP_VELOCITY = 600; //dustin 200 seattle false
 
     private final WallpaperManager mWallpaperManager;
     
@@ -131,7 +132,8 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     private static final float FLING_VELOCITY_INFLUENCE = 0.4f;
     
     private static class WorkspaceOvershootInterpolator implements Interpolator {
-        private static final float DEFAULT_TENSION = 1.3f;
+	// dustin adjust tension down from 1.3f        
+	private static final float DEFAULT_TENSION = 2.0f; //dustin 0.3
         private float mTension;
 
         public WorkspaceOvershootInterpolator() {
@@ -299,8 +301,10 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         if (!mScroller.isFinished()) mScroller.abortAnimation();
         clearVacantCache();
         mCurrentScreen = Math.max(0, Math.min(currentScreen, getChildCount() - 1));
-        mPreviousIndicator.setLevel(mCurrentScreen);
-        mNextIndicator.setLevel(mCurrentScreen);
+        if( !mLauncher.fourHotseats() ){
+            mPreviousIndicator.setLevel(mCurrentScreen);
+            mNextIndicator.setLevel(mCurrentScreen);
+        }
         scrollTo(mCurrentScreen * getWidth(), 0);
         updateWallpaperOffset();
         invalidate();
@@ -450,8 +454,10 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             postInvalidate();
         } else if (mNextScreen != INVALID_SCREEN) {
             mCurrentScreen = Math.max(0, Math.min(mNextScreen, getChildCount() - 1));
-            mPreviousIndicator.setLevel(mCurrentScreen);
-            mNextIndicator.setLevel(mCurrentScreen);
+            if( !mLauncher.fourHotseats() ){
+                mPreviousIndicator.setLevel(mCurrentScreen);
+                mNextIndicator.setLevel(mCurrentScreen);
+            }
             Launcher.setScreen(mCurrentScreen);
             mNextScreen = INVALID_SCREEN;
             clearChildrenCache();
@@ -558,7 +564,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     public boolean requestChildRectangleOnScreen(View child, Rect rectangle, boolean immediate) {
         int screen = indexOfChild(child);
         if (screen != mCurrentScreen || !mScroller.isFinished()) {
-            snapToScreen(screen);
+            if (!mLauncher.isWorkspaceLocked()) {
+                snapToScreen(screen);
+            }
             return true;
         }
         return false;
@@ -623,7 +631,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (mLauncher.isAllAppsVisible()) {
+            if (mLauncher.isWorkspaceLocked() || mLauncher.isAllAppsVisible()) {
                 return false;
             }
         }
@@ -632,8 +640,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        final boolean workspaceLocked = mLauncher.isWorkspaceLocked();
         final boolean allAppsVisible = mLauncher.isAllAppsVisible();
-        if (allAppsVisible) {
+        if (workspaceLocked || allAppsVisible) {
             return false; // We don't want the events.  Let them fall through to the all apps view.
         }
 
@@ -653,7 +662,10 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             return true;
         }
 
-        acquireVelocityTrackerAndAddMovement(ev);
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        mVelocityTracker.addMovement(ev);
         
         switch (action & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_MOVE: {
@@ -738,7 +750,12 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                 mTouchState = TOUCH_STATE_REST;
                 mActivePointerId = INVALID_POINTER;
                 mAllowLongPress = false;
-                releaseVelocityTracker();
+                
+                if (mVelocityTracker != null) {
+                    mVelocityTracker.recycle();
+                    mVelocityTracker = null;
+                }
+
                 break;
                 
             case MotionEvent.ACTION_POINTER_UP:
@@ -829,6 +846,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         
+        if (mLauncher.isWorkspaceLocked()) {
+            return false; // We don't want the events.  Let them fall through to the all apps view.
+        }
         if (mLauncher.isAllAppsVisible()) {
             // Cancel any scrolling that is in progress.
             if (!mScroller.isFinished()) {
@@ -838,7 +858,10 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             return false; // We don't want the events.  Let them fall through to the all apps view.
         }
 
-        acquireVelocityTrackerAndAddMovement(ev);
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        mVelocityTracker.addMovement(ev);
 
         final int action = ev.getAction();
 
@@ -890,7 +913,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             if (mTouchState == TOUCH_STATE_SCROLLING) {
                 final VelocityTracker velocityTracker = mVelocityTracker;
                 velocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
-                final int velocityX = (int) velocityTracker.getXVelocity(mActivePointerId);
+		// dustin add velocity multiplier
+		final int vMultiplier = 40;
+                final int velocityX = vMultiplier * (int) velocityTracker.getXVelocity(mActivePointerId);
                 
                 final int screenWidth = getWidth();
                 final int whichScreen = (mScrollX + (screenWidth / 2)) / screenWidth;
@@ -901,30 +926,30 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                     // Don't fling across more than one screen at a time.
                     final int bound = scrolledPos < whichScreen ?
                             mCurrentScreen - 1 : mCurrentScreen;
-                    snapToScreen(Math.min(whichScreen, bound), velocityX, true);
+		    // dustin don't use 'settle'
+                    snapToScreen(Math.min(whichScreen, bound), velocityX, false);
                 } else if (velocityX < -SNAP_VELOCITY && mCurrentScreen < getChildCount() - 1) {
                     // Fling hard enough to move right
                     // Don't fling across more than one screen at a time.
                     final int bound = scrolledPos > whichScreen ?
                             mCurrentScreen + 1 : mCurrentScreen;
-                    snapToScreen(Math.max(whichScreen, bound), velocityX, true);
+	            // dustin don't use 'settle'
+                    snapToScreen(Math.max(whichScreen, bound), velocityX, false);
                 } else {
                     snapToScreen(whichScreen, 0, true);
+                }
+
+                if (mVelocityTracker != null) {
+                    mVelocityTracker.recycle();
+                    mVelocityTracker = null;
                 }
             }
             mTouchState = TOUCH_STATE_REST;
             mActivePointerId = INVALID_POINTER;
-            releaseVelocityTracker();
             break;
         case MotionEvent.ACTION_CANCEL:
-            if (mTouchState == TOUCH_STATE_SCROLLING) {
-                final int screenWidth = getWidth();
-                final int whichScreen = (mScrollX + (screenWidth / 2)) / screenWidth;
-                snapToScreen(whichScreen, 0, true);
-            }
             mTouchState = TOUCH_STATE_REST;
             mActivePointerId = INVALID_POINTER;
-            releaseVelocityTracker();
             break;
         case MotionEvent.ACTION_POINTER_UP:
             onSecondaryPointerUp(ev);
@@ -934,25 +959,12 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         return true;
     }
     
-    private void acquireVelocityTrackerAndAddMovement(MotionEvent ev) {
-        if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain();
-        }
-        mVelocityTracker.addMovement(ev);
-    }
-
-    private void releaseVelocityTracker() {
-        if (mVelocityTracker != null) {
-            mVelocityTracker.recycle();
-            mVelocityTracker = null;
-        }
-    }
-
     void snapToScreen(int whichScreen) {
         snapToScreen(whichScreen, 0, false);
     }
 
     private void snapToScreen(int whichScreen, int velocity, boolean settle) {
+
         //if (!mScroller.isFinished()) return;
 
         whichScreen = Math.max(0, Math.min(whichScreen, getChildCount() - 1));
@@ -962,9 +974,10 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
         mNextScreen = whichScreen;
 
-        mPreviousIndicator.setLevel(mNextScreen);
-        mNextIndicator.setLevel(mNextScreen);
-
+        if( !mLauncher.fourHotseats() ){
+            mPreviousIndicator.setLevel(mNextScreen);
+            mNextIndicator.setLevel(mNextScreen);
+        }
         View focusedChild = getFocusedChild();
         if (focusedChild != null && whichScreen != mCurrentScreen &&
                 focusedChild == getChildAt(mCurrentScreen)) {
@@ -974,7 +987,11 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         final int screenDelta = Math.max(1, Math.abs(whichScreen - mCurrentScreen));
         final int newX = whichScreen * getWidth();
         final int delta = newX - mScrollX;
-        int duration = (screenDelta + 1) * 100;
+// dustin added duration var to change from 100 in both cases (100 = aosp default)
+// setting this to 0 negates all velocity information including velocity multiplier set up below
+// setting this to 40 is better than 100 but I like it at 0 which basically gets rid of all the animation
+	final int durationMultiplier = 60; //dustin 0
+        int duration = (screenDelta + 1) * durationMultiplier;  
 
         if (!mScroller.isFinished()) {
             mScroller.abortAnimation();
@@ -991,7 +1008,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             duration += (duration / (velocity / BASELINE_FLING_VELOCITY))
                     * FLING_VELOCITY_INFLUENCE;
         } else {
-            duration += 100;
+            duration += durationMultiplier;
         }
 
         awakenScrollBars(duration);
@@ -1350,6 +1367,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                             if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
                                 for (String packageName: packageNames) {
                                     if (packageName.equals(name.getPackageName())) {
+                                        // TODO: This should probably be done on a worker thread
                                         LauncherModel.deleteItemFromDatabase(mLauncher, info);
                                         childrenToRemove.add(view);
                                     }
@@ -1371,7 +1389,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                                     for (String packageName: packageNames) {
                                         if (packageName.equals(name.getPackageName())) {
                                             toRemove.add(appInfo);
-                                            LauncherModel.deleteItemFromDatabase(mLauncher, appInfo);
+                                            // TODO: This should probably be done on a worker thread
+                                            LauncherModel.deleteItemFromDatabase(
+                                                    mLauncher, appInfo);
                                             removedFromFolder = true;
                                         }
                                     }
@@ -1392,6 +1412,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                             if (providerInfo != null) {
                                 for (String packageName: packageNames) {
                                     if (packageName.equals(providerInfo.packageName)) {
+                                        // TODO: This should probably be done on a worker thread
                                         LauncherModel.deleteItemFromDatabase(mLauncher, info);
                                         childrenToRemove.add(view);                        
                                     }
@@ -1404,6 +1425,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                             if (provider != null) {
                                 for (String packageName: packageNames) {
                                     if (packageName.equals(provider.provider.getPackageName())) {
+                                        // TODO: This should probably be done on a worker thread
                                         LauncherModel.deleteItemFromDatabase(mLauncher, info);
                                         childrenToRemove.add(view);                                
                                     }

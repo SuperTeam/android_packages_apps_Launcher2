@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+	<!--******** Checkboxes -->
+
+	<!--******** ListPrefs -->
+
+	<!--Number of hotseats to display -->
+	<string name="numHotseats_key">numHotseats</string>
+	<string name="numHotseats_title">Number of Hotseats</string>
+	<string name="numHotseats_summary">The number of hotseats to show in portrait mode.</string>
+	<string name="numHotseats_default">4</string>
+	    <!-- listvals -->
+	    <string-array name="numHotseats_display">
+		    <item>2 Hotseats</item>
+		    <item>4 Hotseats</item>
+	    </string-array>
+	    <!-- realvals -->
+	    <string-array name="numHotseats_values">
+		    <item>2</item>
+		    <item>4</item>
+	    </string-array>
+
+	<!--Hotseat default icon styles -->
+	<string name="hotseatDef_key">hotseatDef</string>
+	<string name="hotseatDef_title">Hotseat Icon Style</string>
+	<string name="hotseatDef_summary">The style of the default icon set.</string>
+	<string name="hotseatDef_default">gingerbread</string>
+	    <!-- listvals -->
+	    <string-array name="hotseatDef_display">
+		    <item>Froyo Style</item>
+		    <item>Gingerbread Style</item>
+	    </string-array>
+	    <!-- realvals -->
+	    <string-array name="hotseatDef_values">
+		    <item>froyo</item>
+		    <item>gingerbread</item>
+	    </string-array>
+
+	<!--Hotseat default icon styles -->
+	<string name="hotseatBG_key">hotseatBG</string>
+	<string name="hotseatBG_title">Hotseat Background</string>
+	<string name="hotseatBG_summary">The style of the hotseat area background.</string>
+	<string name="hotseatBG_default">gingerbread</string>
+	    <!-- listvals -->
+	    <string-array name="hotseatBG_display">
+		    <item>Froyo Style</item>
+		    <item>Gingerbread Style</item>
+		    <item>Black</item>
+		    <item>Transparent</item>
+	    </string-array>
+	    <!-- realvals -->
+	    <string-array name="hotseatBG_values">
+		    <item>froyo</item>
+		    <item>gingerbread</item>
+		    <item>black</item>
+		    <item>transparent</item>
+	    </string-array>
+
+</resources>

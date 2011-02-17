@@ -88,8 +88,6 @@
 
     <!-- Title of dialog when user is selecting shortcut to add to homescreen -->
     <string name="title_select_shortcut">Select shortcut</string>
-    <!-- Title of dialog when user is selecting an application to add to homescreen -->
-    <string name="title_select_application">Select application</string>
     <!-- Title of dialog when user is selecting live folder to add to homescreen -->
     <string name="title_select_live_folder">Select folder</string>
 
@@ -104,7 +102,7 @@
     <!-- Verb, menu item used to add an item on the desktop -->
     <string name="menu_add">Add</string>
     <!-- Menu item used to manage installed applications -->
-    <string name="menu_manage_apps">Manage apps</string>
+    <string name="menu_manage_apps">Manage Apps</string>
     <!-- Noun, menu item used to set the desktop's wallpaper -->
     <string name="menu_wallpaper">Wallpaper</string>
     <!-- Verb, menu item used to initiate global search -->
@@ -150,5 +148,24 @@
          by the client-id, e.g. "android-google". -->
     <string name="default_browser_url" translatable="false">
         http://www.google.com/m?client=ms-{CID}&amp;source=android-home-hotseat</string>
+
+    <!-- Context menu for hotseat items -->
+    <string name="hotseat_context_title">Hotseat Options</string>
+    <string name="hotseat_context_select">Choose Application</string>
+    <string name="hotseat_context_default">Default Application</string>
+    <string name="hotseat_context_cancel">Cancel</string>
+
+    <!-- Hotseat app chooser -->
+    <string name="hotseat_selector_title">Hotseat Options</string>
+    <string name="hotseat_selector_init_toast">Choose an app for this hotseat.</string>
+
+    <!-- Application selection activity -->
+    <string name="select_app_working">Loading Applications</string>
+
+    <!-- Launcher Settings Titles/Sections -->
+    <string name="launcher_menu_prefs_title">Launcher Options</string>
+    <string name="launcher_prefs_title">Launcher Preferences</string>
+	<string name="hotseat_section_prefs">Hotseat Preferences</string>
+
 
 </resources>

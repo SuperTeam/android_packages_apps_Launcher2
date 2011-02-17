@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/launcher_prefs_title">	
+		<PreferenceCategory android:title="@string/hotseat_section_prefs">
+                    <ListPreference android:key="@string/numHotseats_key" android:title="@string/numHotseats_title"
+					android:defaultValue="@string/numHotseats_default" android:entries="@array/numHotseats_display" 
+                    android:entryValues="@array/numHotseats_values"  android:summary="@string/numHotseats_summary"
+                    />	
+                    <ListPreference android:key="@string/hotseatDef_key" android:title="@string/hotseatDef_title"
+					android:defaultValue="@string/hotseatDef_default" android:entries="@array/hotseatDef_display" 
+                    android:entryValues="@array/hotseatDef_values"  android:summary="@string/hotseatDef_summary"
+                    />		
+                    <ListPreference android:key="@string/hotseatBG_key" android:title="@string/hotseatBG_title"
+					android:defaultValue="@string/hotseatBG_default" android:entries="@array/hotseatBG_display" 
+                    android:entryValues="@array/hotseatBG_values"  android:summary="@string/hotseatBG_summary"
+                    />	
+		</PreferenceCategory>
+</PreferenceScreen>
