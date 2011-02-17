@@ -11,7 +11,9 @@
 	<!-- Droid x motoblur (Blur Phone) -->
 	<!--<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.phone/.DialtactsContactsEntryActivity;end</item> -->
 	<!-- Droid 1, Droid x Tranquility (Froyo Phone) -->        
-	<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.contacts/.ContactsLaunchActivity;end</item>
+	<!--<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.contacts/.ContactsLaunchActivity;end</item>-->
+	<!-- GingerBread-->
+	<item>intent:#Intent;action=android.intent.action.MAIN;component=com.android.contacts/.DialtactsActivity;end</item>
 
 	<!-- ******* BROWSER LAUNCHER, right, index 2 ****** -->
         <item>*BROWSER*</item>
