@@ -17,12 +17,6 @@
 
 <resources>
     <string-array name="wallpapers" translatable="false">
-        <item>wallpaper_reactive</item>
-        <item>wallpaper_darkplank</item>
-        <item>wallpaper_nexusgridblack</item>
-        <item>wallpaper_nexuspattern</item> 
-        <item>wallpaper_binary</item>
-        <item>wallpaper_droid</item>
-        <item>wallpaper_x67</item>
+        <item>wallpaper_rot</item>
     </string-array>
 </resources>

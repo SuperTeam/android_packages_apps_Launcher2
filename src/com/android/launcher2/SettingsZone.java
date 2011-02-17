@@ -123,7 +123,7 @@ public class SettingsZone extends ImageView implements DropTarget, DragControlle
 
         Intent i = new Intent( Intent.ACTION_VIEW );
         // TODO is there a better way to do this? 
-        i.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails"); 
+        i.setClassName("com.android.settings", "com.android.settings.applications.InstalledAppDetails"); 
         i.putExtra("pkg", mPackageName); 
         // start new activity to display the information 
         context.startActivity(i); 
