@@ -242,9 +242,9 @@ final class Utilities {
         sIconTextureWidth = sIconTextureHeight = sIconWidth + 2;
 
         sBlurPaint.setMaskFilter(new BlurMaskFilter(5 * density, BlurMaskFilter.Blur.NORMAL));
-        sGlowColorPressedPaint.setColor(0xffffc300);
+        sGlowColorPressedPaint.setColor(0xff0091FF);
         sGlowColorPressedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0, 30));
-        sGlowColorFocusedPaint.setColor(0xffff8e00);
+        sGlowColorFocusedPaint.setColor(0xff0066FF);
         sGlowColorFocusedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0, 30));
 
         ColorMatrix cm = new ColorMatrix();

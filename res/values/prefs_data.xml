@@ -25,7 +25,7 @@
 	<string name="hotseatDef_key">hotseatDef</string>
 	<string name="hotseatDef_title">Hotseat Icon Style</string>
 	<string name="hotseatDef_summary">The style of the default icon set.</string>
-	<string name="hotseatDef_default">gingerbread</string>
+	<string name="hotseatDef_default">froyo</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatDef_display">
 		    <item>Froyo Style</item>
@@ -41,7 +41,7 @@
 	<string name="hotseatBG_key">hotseatBG</string>
 	<string name="hotseatBG_title">Hotseat Background</string>
 	<string name="hotseatBG_summary">The style of the hotseat area background.</string>
-	<string name="hotseatBG_default">gingerbread</string>
+	<string name="hotseatBG_default">froyo</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatBG_display">
 		    <item>Froyo Style</item>

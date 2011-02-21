@@ -25,7 +25,7 @@
 	<string name="hotseatDef_key">hotseatDef</string>
 	<string name="hotseatDef_title">Estilo de icono</string>
 	<string name="hotseatDef_summary">Estilo del icono por defecto.</string>
-	<string name="hotseatDef_default">gingerbread</string>
+	<string name="hotseatDef_default">froyo</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatDef_display">
 		    <item>Estilo Froyo</item>
@@ -41,7 +41,7 @@
 	<string name="hotseatBG_key">hotseatBG</string>
 	<string name="hotseatBG_title">Fondo de widgets</string>
 	<string name="hotseatBG_summary">Tipo de fondo.</string>
-	<string name="hotseatBG_default">gingerbread</string>
+	<string name="hotseatBG_default">froyo</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatBG_display">
 		    <item>Estilo Froyo</item>
