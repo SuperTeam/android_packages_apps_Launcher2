@@ -126,13 +126,13 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         
-        <activity android:name=".InstalledAppDetails">
+        <!--<activity android:name=".InstalledAppDetails">
             <intent-filter>
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
-        </activity>
+        </activity>-->
 
     </application>
 </manifest>

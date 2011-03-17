@@ -98,7 +98,7 @@
             launcher:direction="vertical"
             />
 
-        <com.android.launcher2.SettingsZone
+       <!-- <com.android.launcher2.SettingsZone
             android:id="@+id/settings_zone"
             android:layout_width="@dimen/delete_zone_size"
             android:layout_weight="1"
@@ -110,7 +110,7 @@
             android:src="@drawable/settings_zone_selector"
             android:visibility="invisible"
             launcher:direction="vertical"
-            />
+            />-->
 
     </LinearLayout>
 
