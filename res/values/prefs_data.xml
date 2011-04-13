@@ -41,7 +41,7 @@
 	<string name="hotseatBG_key">hotseatBG</string>
 	<string name="hotseatBG_title">Hotseat Background</string>
 	<string name="hotseatBG_summary">The style of the hotseat area background.</string>
-	<string name="hotseatBG_default">froyo</string>
+	<string name="hotseatBG_default">transparent</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatBG_display">
 		    <item>Froyo Style</item>
