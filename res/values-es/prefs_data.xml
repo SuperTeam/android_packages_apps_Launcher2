@@ -41,7 +41,7 @@
 	<string name="hotseatBG_key">hotseatBG</string>
 	<string name="hotseatBG_title">Fondo de widgets</string>
 	<string name="hotseatBG_summary">Tipo de fondo.</string>
-	<string name="hotseatBG_default">froyo</string>
+	<string name="hotseatBG_default">transparent</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatBG_display">
 		    <item>Estilo Froyo</item>
