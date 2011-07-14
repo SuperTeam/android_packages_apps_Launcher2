@@ -66,13 +66,13 @@
     <string name="gadget_error_text" msgid="8359351016167075858">"Problema al cargar el widget"</string>
     <!-- Context menu for hotseat items -->
     <string name="hotseat_context_title">Opciones de dock</string>
-    <string name="hotseat_context_select">Escoje aplicación</string>
+    <string name="hotseat_context_select">Escoge aplicación</string>
     <string name="hotseat_context_default">Aplicación por defecto</string>
     <string name="hotseat_context_cancel">Cancela</string>
 
     <!-- Hotseat app chooser -->
     <string name="hotseat_selector_title">Opciones de dock</string>
-    <string name="hotseat_selector_init_toast">Escoje una app para el dock.</string>
+    <string name="hotseat_selector_init_toast">Escoge una app para el dock.</string>
 
     <!-- Application selection activity -->
     <string name="select_app_working">Cargando aplicaciones</string>
