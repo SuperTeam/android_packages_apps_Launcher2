@@ -1,60 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-	<!--******** Checkboxes -->
-
-	<!--******** ListPrefs -->
-
 	<!--Number of hotseats to display -->
-	<string name="numHotseats_key">numHotseats</string>
 	<string name="numHotseats_title">Número of widgets</string>
 	<string name="numHotseats_summary">Número de widgets para mostrar en modo vertical.</string>
-	<string name="numHotseats_default">4</string>
 	    <!-- listvals -->
 	    <string-array name="numHotseats_display">
 		    <item>2 widgets</item>
 		    <item>4 widgets</item>
 	    </string-array>
-	    <!-- realvals -->
-	    <string-array name="numHotseats_values">
-		    <item>2</item>
-		    <item>4</item>
-	    </string-array>
 
 	<!--Hotseat default icon styles -->
-	<string name="hotseatDef_key">hotseatDef</string>
 	<string name="hotseatDef_title">Estilo de icono</string>
 	<string name="hotseatDef_summary">Estilo del icono por defecto.</string>
-	<string name="hotseatDef_default">froyo</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatDef_display">
 		    <item>Estilo Froyo</item>
 		    <item>Estilo Gingerbread</item>
 	    </string-array>
-	    <!-- realvals -->
-	    <string-array name="hotseatDef_values">
-		    <item>froyo</item>
-		    <item>gingerbread</item>
-	    </string-array>
 
 	<!--Hotseat default icon styles -->
-	<string name="hotseatBG_key">hotseatBG</string>
 	<string name="hotseatBG_title">Fondo de widgets</string>
 	<string name="hotseatBG_summary">Tipo de fondo.</string>
-	<string name="hotseatBG_default">transparent</string>
 	    <!-- listvals -->
 	    <string-array name="hotseatBG_display">
 		    <item>Estilo Froyo</item>
 		    <item>Estilo Gingerbread</item>
 		    <item>Negro</item>
 		    <item>Transparente</item>
-	    </string-array>
-	    <!-- realvals -->
-	    <string-array name="hotseatBG_values">
-		    <item>froyo</item>
-		    <item>gingerbread</item>
-		    <item>black</item>
-		    <item>transparent</item>
 	    </string-array>
 
 </resources>
