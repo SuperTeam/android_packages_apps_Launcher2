@@ -39,12 +39,12 @@
         launcher:spanY="2" />-->
 
 
-    <favorite
+    <!--<favorite
         launcher:packageName="com.google.android.apps.maps"
         launcher:className="com.google.android.maps.driveabout.app.DestinationActivity"
         launcher:screen="2"
         launcher:x="0"
-        launcher:y="3" />
+        launcher:y="3" />-->
 
   <!--  <favorite
         launcher:packageName="com.android.contacts"
@@ -60,12 +60,12 @@
         launcher:x="2"
         launcher:y="3" />-->
 
-    <favorite
+    <!--<favorite
         launcher:packageName="com.google.android.apps.maps"
         launcher:className="com.google.android.maps.MapsActivity"
         launcher:screen="2"
         launcher:x="3"
-        launcher:y="3" />
+        launcher:y="3" />-->
 
     <!--  Right screen [3] -->
 
