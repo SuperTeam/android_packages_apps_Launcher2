@@ -119,7 +119,8 @@ public final class Launcher extends Activity
     private static final int MENU_GROUP_WALLPAPER = MENU_GROUP_ADD + 1;
 
     private static final int MENU_PREFS = Menu.FIRST + 1;
-    private static final int MENU_ADD = MENU_PREFS + 1;
+    private static final int MENU_MANAGE_APPS = MENU_PREFS + 1;
+    private static final int MENU_ADD = MENU_MANAGE_APPS + 1;
     private static final int MENU_WALLPAPER_SETTINGS = MENU_ADD + 1;
     private static final int MENU_SEARCH = MENU_WALLPAPER_SETTINGS + 1;
     private static final int MENU_SETTINGS = MENU_SEARCH + 1;
@@ -871,8 +872,10 @@ public final class Launcher extends Activity
 
         if( !this.fourHotseats() && this.isPortrait() ){
             // hide extra hotseats
-            mHotseats[0].setVisibility( View.GONE );
-            mHotseats[3].setVisibility( View.GONE );
+            if (mHotseats[0] != null)
+				mHotseats[0].setVisibility( View.GONE );
+            if (mHotseats[3] != null)
+			    mHotseats[3].setVisibility( View.GONE );
             // change up backgrounds
             mHotseats[1].setBackgroundDrawable(mHotseatBackgrounds[0]);
             mHotseats[2].setBackgroundDrawable(mHotseatBackgrounds[3]);
@@ -1258,6 +1261,9 @@ public final class Launcher extends Activity
         menu.add(0, MENU_PREFS, 0, R.string.launcher_menu_prefs_title)
                 .setIcon(android.R.drawable.ic_menu_preferences)
                 .setAlphabeticShortcut('P');
+		menu.add(0, MENU_MANAGE_APPS, 0, R.string.menu_manage_apps)
+                .setIcon(android.R.drawable.ic_menu_manage)
+                .setAlphabeticShortcut('M');
         menu.add(MENU_GROUP_ADD, MENU_ADD, 0, R.string.menu_add)
                 .setIcon(android.R.drawable.ic_menu_add)
                 .setAlphabeticShortcut('A');
@@ -1309,6 +1315,9 @@ public final class Launcher extends Activity
             case MENU_PREFS:
                 this.registerForPreferenceChanges();
                 this.startActivity( new Intent( this, LauncherPrefs.class ) );
+                return true;
+            case MENU_MANAGE_APPS:
+                manageApps();
                 return true;
             case MENU_ADD:
                 addItems();
