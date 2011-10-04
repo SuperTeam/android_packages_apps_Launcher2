@@ -1157,7 +1157,7 @@ public class AllApps3D extends RSSurfaceView
                     "  float bendY1 = UNI_BendPos.x;\n" +
                     "  float bendY2 = UNI_BendPos.y;\n" +
 			// dustin -- adjuted bend angle to 40deg (From 47)
-                    "  float bendAngle = 50.0 * (3.14 / 180.0);\n" +
+                    "  float bendAngle = 55.0 * (3.14 / 180.0);\n" +
                     "  float bendDistance = bendY1 * 0.4;\n" +
                     "  float distanceDimLevel = 0.6;\n" +
 

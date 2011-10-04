@@ -63,7 +63,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
      * The velocity at which a fling gesture will cause us to snap to the next screen
      * dustin --- cut snap velocity in half for easier fling envoking...
      */
-    private static final int SNAP_VELOCITY = 600; //dustin 200 seattle false
+    private static final int SNAP_VELOCITY = 400; //dustin 200 seattle false
 
     private final WallpaperManager mWallpaperManager;
     

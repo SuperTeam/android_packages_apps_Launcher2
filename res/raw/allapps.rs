@@ -71,7 +71,7 @@ void setColor(float r, float g, float b, float a) {
 
 void init() {
 
-/*
+
     g_AttractionTable[0] = 20.0f;
     g_AttractionTable[1] = 20.0f;
     g_AttractionTable[2] = 20.0f;
@@ -93,8 +93,8 @@ void init() {
     g_FrictionTable[7] = 10.0f;
     g_FrictionTable[8] = 10.0f;  // dup 7 to avoid a clamp later
     g_PhysicsTableSize = 7;
-*/
 
+/*
 // dustin -- testing modifications to attraction/friction tables
     g_AttractionTable[0] = 25.0f;
     g_AttractionTable[1] = 20.0f;
@@ -117,7 +117,7 @@ void init() {
     g_FrictionTable[8] = 4.0f;  // dup 7 to avoid a clamp later
 
     g_PhysicsTableSize = 7;
-
+*/
     g_PosVelocity = 0;
     g_PosPage = 0;
     g_LastTouchDown = 0;
@@ -127,7 +127,7 @@ void init() {
     g_SpecialHWWar = 1;
     g_MoveToTime = 0;
     g_MoveToOldPos = 0;
-    g_MoveToTotalTime = 0.1f; // Duration of scrolling 1 line
+    g_MoveToTotalTime = 0.5f; // Duration of scrolling 1 line
 }
 
 void resetHWWar() {
@@ -139,7 +139,7 @@ void move() {
         float dx = -(state->newPositionX - g_LastPositionX);
         g_PosVelocity = 0;
 // dustin adjust pos offset a bit from 5.2... this causes faster scrolling when drag-scrolling
-        g_PosPage += dx * 7.2f;
+        g_PosPage += dx * 8.2f;
 
         float pmin = -0.49f;
         float pmax = g_PosMax + 0.49f;
@@ -168,10 +168,10 @@ void setZoom() {
 void fling() {
     g_LastTouchDown = 0;
     // dustin change flingvelocity multiplier from 4, increase to add speed
-    g_PosVelocity = -state->flingVelocity * 6;
+    g_PosVelocity = -state->flingVelocity * 8;
     float av = fabsf(g_PosVelocity);
     // dustin reduce min velocity from 3.5 for more sensitivity
-    float minVel = 1.5f;
+    float minVel = 1.6f;
 
     minVel *= 1.f - (fabsf(fracf(g_PosPage + 0.5f) - 0.5f) * 0.45f);
 
@@ -257,7 +257,7 @@ void updatePos() {
 
     if ((friction > fabsf(g_PosVelocity)) && (friction > fabsf(accel))) {
         // Special get back to center and overcome friction physics.
-        float t = tablePosNorm - 0.5f;
+        float t = tablePosNorm - 0.2f;
         if (fabsf(t) < (friction * g_DT)) {
             // really close, just snap
             g_PosPage = roundf(g_PosPage);
@@ -398,7 +398,7 @@ main(int launchID)
 
     if (g_Zoom != state->zoomTarget) {
 	// Dustin Jorge --- changed zoom speed by adjusting modifier from 1.7 to 4.5
-        float dz = g_DT * 4.5f;
+        float dz = g_DT * 3.0f;
         if (state->zoomTarget < 0.5f) {
             dz = -dz;
         }
