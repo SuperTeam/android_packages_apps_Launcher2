@@ -71,7 +71,7 @@ void setColor(float r, float g, float b, float a) {
 
 void init() {
 
-
+/*
     g_AttractionTable[0] = 20.0f;
     g_AttractionTable[1] = 20.0f;
     g_AttractionTable[2] = 20.0f;
@@ -94,7 +94,7 @@ void init() {
     g_FrictionTable[8] = 10.0f;  // dup 7 to avoid a clamp later
     g_PhysicsTableSize = 7;
 
-/*
+*/
 // dustin -- testing modifications to attraction/friction tables
     g_AttractionTable[0] = 25.0f;
     g_AttractionTable[1] = 20.0f;
@@ -117,7 +117,7 @@ void init() {
     g_FrictionTable[8] = 4.0f;  // dup 7 to avoid a clamp later
 
     g_PhysicsTableSize = 7;
-*/
+
     g_PosVelocity = 0;
     g_PosPage = 0;
     g_LastTouchDown = 0;
@@ -127,7 +127,7 @@ void init() {
     g_SpecialHWWar = 1;
     g_MoveToTime = 0;
     g_MoveToOldPos = 0;
-    g_MoveToTotalTime = 0.5f; // Duration of scrolling 1 line
+    g_MoveToTotalTime = 0.1f; // Duration of scrolling 1 line
 }
 
 void resetHWWar() {
@@ -257,7 +257,7 @@ void updatePos() {
 
     if ((friction > fabsf(g_PosVelocity)) && (friction > fabsf(accel))) {
         // Special get back to center and overcome friction physics.
-        float t = tablePosNorm - 0.2f;
+        float t = tablePosNorm - 0.5f;
         if (fabsf(t) < (friction * g_DT)) {
             // really close, just snap
             g_PosPage = roundf(g_PosPage);
