@@ -82,4 +82,6 @@
     <string name="launcher_menu_prefs_title">Opciones de Launcher</string>
     <string name="launcher_prefs_title">Preferencias de Launcher</string>
 	<string name="hotseat_section_prefs">Preferencias de dock</string>
+	
+	<string name="drop_to_uninstall">Soltar para desinstalar</string>
 </resources>

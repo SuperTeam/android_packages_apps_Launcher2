@@ -167,5 +167,6 @@
     <string name="launcher_prefs_title">Launcher Preferences</string>
 	<string name="hotseat_section_prefs">Hotseat Preferences</string>
 
+    <string name="drop_to_uninstall">Drop to uninstall</string>
 
 </resources>
