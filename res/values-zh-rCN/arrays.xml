@@ -1,98 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="notificationmodenames">
-        <item>无</item>
-        <item>未经授权的客户端</item>
-        <item>所有客户端</item>
+    <string-array name="numHotseats_display">
+        <item>2个图标</item>
+        <item>4个图标</item>
     </string-array>
-    <string-array name="powernames">
-        <item>禁用</item>
-        <item>3 mW (5 dBm)</item>
-        <item>5 mW (7 dBm)</item>
-        <item>10 mW (10 dBm)</item>
-        <item>15 mW (12 dBm)</item>
-        <item>20 mW (13 dBm)</item>
-        <item>25 mW (14 dBm)</item>
-        <item>30 mW (15 dBm)</item>
+    <string-array name="hotseatDef_display">
+        <item>安卓2.2风格</item>
+        <item>安卓2.3风格</item>
     </string-array>
-    <string-array name="encsetupnames">
-        <item>自动</item>
-        <item>iwconfig</item>
-        <item>wpa_supplicant</item>
+    <string-array name="hotseatBG_display">
+        <item>安卓2.2风格</item>
+        <item>安卓2.3风格</item>
+        <item>黑色背景</item>
+        <item>透明背景</item>
     </string-array>
-    <string-array name="batterytempnames">
-        <item>禁用</item>
-        <item>摄氏</item>
-        <item>华氏</item>
-    </string-array>
-    <string-array name="notificationmodevalues">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-    <string-array name="powermodevalues">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-    <string-array name="channelvalues">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-    </string-array>
-    <string-array name="channelnames">
-        <item>Auto</item>
-        <item>频道 01 (2412 MHz)</item>
-        <item>频道 02 (2417 MHz)</item>
-        <item>频道 03 (2422 MHz)</item>
-        <item>频道 04 (2427 MHz)</item>
-        <item>频道 05 (2432 MHz)</item>
-        <item>频道 06 (2437 MHz)</item>
-        <item>频道 07 (2442 MHz)</item>
-        <item>频道 08 (2447 MHz)</item>
-        <item>频道 09 (2452 MHz)</item>
-        <item>频道 10 (2457 MHz)</item>
-        <item>频道 11 (2462 MHz)</item>
-    </string-array>
-    <string-array name="lannetworkvalues">
-        <item>192.168.1.0/24</item>
-        <item>192.168.2.0/24</item>
-        <item>192.168.3.0/24</item>
-        <item>172.20.21.0/24</item>
-        <item>172.20.22.0/24</item>
-        <item>172.20.23.0/24</item>
-        <item>10.10.1.0/24</item>
-        <item>10.10.2.0/24</item>
-        <item>10.10.3.0/24</item>
-    </string-array>
-    <string-array name="powervalues">
-        <item>disabled</item>
-        <item>3mW</item>
-        <item>5mW</item>
-        <item>10mW</item>
-        <item>15mW</item>
-        <item>20mW</item>
-        <item>25mW</item>
-        <item>30mW</item>
-    </string-array>
-    <string-array name="encsetupvalues">
-        <item>自动</item>
-        <item>iwconfig</item>
-        <item>wpa_supplicant</item>
-    </string-array>
-    <string-array name="batterytempvalues">
-        <item>禁用</item>
-        <item>摄氏</item>
-        <item>华氏</item>
-    </string-array>
-</resources>
+</resources
